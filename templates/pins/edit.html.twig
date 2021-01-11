@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title 'Pin N°' ~ pin.id ~ 'edition' %}
+{% block stylesheets %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style></style>
+	</head>
+{% endblock %}
+{% block body %}
+	<div class="example-wrapper">
+		<h1>Edit Pin N°{{pin.id}}</h1>
+
+		{{ form_start(monFormulaire) }}
+		{{form_widget(monFormulaire)}}
+		<input type="submit" value="Save Pin">
+
+		{{ form_end(monFormulaire) }}
+		<a href=" {{ path('app_home') }} ">Back to Home page</a>
+	</div>
+{% endblock %}

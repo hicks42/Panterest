@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Pin creation
+{% endblock %}
+{% block stylesheets %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pin Creator</title>
+		<style></style>
+	</head>
+{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+		<h1>Create Pin</h1>
+
+		{{ form_start(monFormulaire) }}
+		{{form_widget(monFormulaire)}}
+		<input type="submit" value="Create Pin">
+
+		{{ form_end(monFormulaire) }}
+		<a href=" {{ path('app_home') }} ">Back to Home page</a>
+	</div>
+{% endblock %}

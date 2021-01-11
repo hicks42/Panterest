@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PinsController!
+{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% block body %}
+	<div class="example-wrapper">
+		<h1>
+			{{ pluralize(pins|length, 'Pin' )}}</h1>
+		<a href="{{ path('app_pins_create') }}">Créer un pin</a>
+
+
+		{% for pin in pins %}
+			<article>
+				<h3>
+					<a href=" {{ path('app_pins_show',{'id': pin.id} ) }} ">{{ pin.Title() }}</a>
+				</h3>
+				<p>{{ pin.Description() }}</p>
+			</article>
+		{% else %}
+			<p>
+				Sorry, there is no pin !</p>
+		{% endfor %}
+
+	</div>
+{% endblock %}
