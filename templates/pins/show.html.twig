@@ -1,13 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block title %}Show pin
-{% endblock %}
-{% block stylesheets %}
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Show Pin{{pin.id}}</title>
-	</head>
-{% endblock %}
+{% block title  %}Show Pin N°{{pin.id}}
+{% endblock title %}
 {% block body %}
 	<div class="example-wrapper">
 		<h1>{{pin.title}}</h1>
@@ -15,12 +8,12 @@
 			{{pin.description}}
 		</p>
 		<a href="{{path('app_pins_edit',{'id':pin.id})}}">Edit</a>
-		{# <a href="{{path('app_pins_delete',{'id':pin.id})}}">Delete</a> #}
+		<a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-pin-delete-form').submit(); ">Delete</a>
 
-		<form action="{{ path('app_pins_delete', {'id':pin.id}) }}" method="POST">
-			<input type="hidden" name="_method" value="DELETE" style="display:none;">
-			<input type="submit" value="Delete Pin">
+		<form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id:pin.id}) }}" method="POST" style="display:none;">
+			<input type="hidden" name="csrf_token" value="{{csrf_token('pin_deletion_' ~ pin.id)}}">
+			<input type="hidden" name="_method" value="DELETE">
 		</form>
-		<a href=" {{ path('app_home') }} ">Back to Home page</a>
+		<a href=" {{ path('app_home') }} ">Home page</a>
 	</div>
 {% endblock %}

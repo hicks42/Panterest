@@ -18,7 +18,8 @@ class PinsController extends AbstractController
      */
     public function index(PinRepository $repo): Response
     {
-        return $this->render('pins/index.html.twig', ['pins' => $repo->findall()]);
+        $pins = $repo->findBy([], ['createdAt' => 'DESC']);
+        return $this->render('pins/index.html.twig', compact('pins'));
     }
 
     /**
@@ -28,10 +29,9 @@ class PinsController extends AbstractController
     {
         $pin = new Pin;
 
-        $form = $this->createForm(PinType::class);
+        $form = $this->createForm(PinType::class, $pin);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($pin);
             $em->flush();
@@ -79,10 +79,12 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/delete/{id<\d+>}", name="app_pins_delete", methods={"DELETE"})
      */
-    public function delete(Pin $pin, EntityManagerInterface $em): Response
+    public function delete(Request $request, Pin $pin, EntityManagerInterface $em): Response
     {
-        $em->remove($pin);
-        $em->flush();
+        if ($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->request->get('csrf_token'))) {
+            $em->remove($pin);
+            $em->flush();
+        }
         return $this->redirectToRoute('app_home');
     }
 }
