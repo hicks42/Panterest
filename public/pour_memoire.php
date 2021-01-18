@@ -1,5 +1,8 @@
 <?php
 
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+
     /**
      * @Route("/")
      */

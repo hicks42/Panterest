@@ -1,4 +1,5 @@
 {{ form_start(monFormulaire) }}
 {{form_widget(monFormulaire)}}
-<input type="submit" value=" {{submitButtonText}} ">
+
+<input type="submit" value="{{submitButtonText ?? 'Create Pin'}}" class="btn btn-primary btn-block" formnovalidate>
 {{ form_end(monFormulaire) }}
