@@ -1,6 +1,10 @@
-html,
-body {
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+@import "~bootstrap/scss/bootstrap";
+
+html, body {
   font-family: "Nunito", sans-serif;
+  background-color: lightgray;
 }
 .example-wrapper {
   margin: 1em auto;

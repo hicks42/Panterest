@@ -4,7 +4,6 @@
 {% block body %}
 	<div class="example-wrapper">
 		<h1>{{pluralize(pins|length, 'Pin')}}</h1>
-		<a href="{{ path('app_pins_create') }}">Créer un pin</a>
 		{% for pin in pins %}
 			<article>
 				<h3>
