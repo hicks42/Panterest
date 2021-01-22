@@ -2,21 +2,40 @@
 {% block title %}Hello PinsController !
 {% endblock %}
 {% block body %}
-	<div class="example-wrapper">
-		<h1>{{pluralize(pins|length, 'Pin')}}</h1>
-		{% for pin in pins %}
-			<article>
-				<h3>
-					<a href=" {{ path('app_pins_show',{'id': pin.id} ) }} ">{{ pin.Title() }}</a>
-				</h3>
-				<p>{{ pin.Description()|u.truncate(15, '...', false) }}</p>
-				<p>submitted
-					{{ pin.createdAt|ago }}</p>
-			</article>
-		{% else %}
-			<p>
-				Sorry, there is no pin !</p>
-		{% endfor %}
+	{% if pins|length > 0 %}
+		<h1 class="text-center text-muted">{{pluralize(pins|length, 'Pin')}}</h1>
+		{% for row in pins|batch(3)  %}
+			<div class="row mb-5">
+				{% for pin in row %}
+					<div class="col-md-4">
+						<article class="pin bg-white rounded shadow">
+							<div class="mw-100 overflow-hidden">
+								<a href=" {{ path('app_pins_show', {id:pin.id}) }} ">
+									<img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpg')) | imagine_filter('square_thumbnail_medium') }}" alt="{{ pin.Title }}" class="w-100 rounded-top"/></a>
+							</div>
+							<h2 class="h5 pl-3 pt-3">
+								<a href="{{ path('app_pins_show',{'id': pin.id} ) }}" class=" text-secondary text-decoration-none">{{ pin.Title() }}</a>
 
-	</div>
+							</h2>
+							{# <p>{{ pin.Description()|u.truncate(50, '...', false) }}</p> #}
+							<p class="text-muted pl-3 pb-3">
+								<small>
+									<strong>Submitted [OWNER FULL NAME]</strong><br>
+									{{ pin.createdAt|ago }}</small>
+							</p>
+						</article>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	{% else %}
+		<p class="h1 mt-5 text-align:center">
+			No pin yet !
+		</p>
+		<p class="h4 mt-5 text-center">
+			<a href={{ path ('app_pins_create') }}>
+				Be the first.</a>
+		</p>
+	{% endif %}
+
 {% endblock %}

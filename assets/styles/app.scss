@@ -2,9 +2,11 @@
 
 @import "~bootstrap/scss/bootstrap";
 
+@import 'shared/variables';
+
 html, body {
-  font-family: "Nunito", sans-serif;
-  background-color: lightgray;
+  font-family: $primary-font, sans-serif;
+  // background-color: lightgray;
 }
 .example-wrapper {
   margin: 1em auto;
@@ -22,13 +24,33 @@ html, body {
   text-align: center;
   border: none;
   border-radius: 0;
+  
+  &.alert-success {
+    background-color: green;
+  }
+  &.alert-error {
+    background-color: red;
+  }
+  &.alert-info {
+    background-color: blue;
+  }
 }
-.alert-success {
-  background-color: green;
+.vich-image{ 
+  .form-check{
+    @extend .mt-3;
 }
-.alert-error {
-  background-color: red;
+
+  img {
+    @extend .mb-2;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail;  
 }
-.alert-info {
-  background-color: blue;
+}
+
+.pin img {
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform:scale(1.05) ;
+  }
 }
