@@ -1,0 +1,16 @@
+@startuml Pinterest 
+package "buisness rules" #FFF{
+    package "Entities" #EEEEEE{
+        class User {
+            {field} id: int
+            {field} FirstName: string
+            {field} LastName: string
+            {field} Email: string
+            {field} Password: string
+            {field} PlainPassword: string
+            {field} CreatedAt: DateTimeInterface
+            {field} UpdatedAt: DateTimeInterface
+        }
+    }
+}
+@enduml
