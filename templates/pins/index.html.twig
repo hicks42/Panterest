@@ -20,7 +20,8 @@
 							{# <p>{{ pin.Description()|u.truncate(50, '...', false) }}</p> #}
 							<p class="text-muted pl-3 pb-3">
 								<small>
-									<strong>Submitted [OWNER FULL NAME]</strong><br>
+									Submitted by
+									<strong>{{ pin.user.FullName }}</strong><br>
 									{{ pin.createdAt|ago }}</small>
 							</p>
 						</article>
