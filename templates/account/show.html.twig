@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="row">
+		<div class="col-md-6 mx-auto text-center">
+			<h1 class="my-5">Profile</h1>
+
+			<img src="{{app.user.gravatar(500) }}" alt="Avatar" class="shadow rounded">
+			<h2>{{app.user.FullName}}</h2>
+			<p class="lead">
+				<a href="mailto:{{app.user.Email}}">
+					{{app.user.Email}}</a>
+			</p>
+            <p><small> Account created on {{app.user.createdAt|date('d/m/y')}} </small></p>
+			<p>
+				<a href="{{path('app_edit_account')}}">Edit account</a>
+				|
+				<a href="{{path('app_change_password')}}">Change password</a>
+			</p>
+		</div>
+	</div>
+{% endblock %}

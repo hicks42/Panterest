@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    public $currentPassword;
     use Timestampable;
     /**
      * @ORM\Id
@@ -208,6 +209,11 @@ class User implements UserInterface
     {
         $fullName = $this->firstName . ' ' . $this->lastName;
         return $fullName;
+    }
+
+    public function gravatar(?int $size = 200)
+    {
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->getEmail()))) . "&s=" . $size;
     }
 
     public function isVerified(): bool

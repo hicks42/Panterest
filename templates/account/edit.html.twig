@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile edition
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	<div class="row">
+		<div class="col-md-6 mx-auto text-center">
+			<h1 class="my-5">Edit Profile</h1>
+			{{form_start(editform)}}
+			<div class="row">
+				<div class="col-md-6">
+					{{ form_row(editform.firstName) }}
+				</div>
+
+				<div class="col-md-6">
+					{{ form_row(editform.lastName) }}
+				</div>
+			</div>
+			{{ form_rest(editform) }}
+			<button type="submit" class="btn btn-primary btn-block">Save modification</button>
+			{{form_end(editform)}}
+		</div>
+	</div>
+{% endblock %}
