@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title Error 403 %}
+{% block body %}
+	<div class="example-wrapper">
+		<h1>Unauthorised Page</h1>
+		<p>
+			You do not have clearance for this page !
+		</p>
+		<a href=" {{ path('app_home') }} ">Home page</a>
+	</div>
+{% endblock %}

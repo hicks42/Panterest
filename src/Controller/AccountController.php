@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -18,22 +19,34 @@ class AccountController extends AbstractController
 {
     /**
      * @Route("", name="app_account", methods="GET")
+     * @IsGranted("ROLE_USER")
      */
     public function index(): Response
     {
+        // if(! $this->getUser()){
+        //     $this->addFlash('error', 'Please, log in first !');
+        //     return $this->redirectToRoute('app_login');
+        // }
+        
         return $this->render('account/show.html.twig', [
             'controller_name' => 'AccountController',
         ]);
     }
 
      /**
-     * @Route("/edit", name="app_edit_account", methods={"PUT","GET"})
+     * @Route("/edit", name="app_edit_account", methods={"GET","PATCH"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function editAccount(Request $request, EntityManagerInterface $em): Response
     {
+        // if(! $this->getUser()){
+        //     $this->addFlash('error', 'Please, log in first !');
+        //     return $this->redirectToRoute('app_login');
+        // }
+
         $user = $this->getUser();
         $form=$this->createForm(UserFormType::class, $user, [
-            'method' => 'PUT'
+            'method' => 'PATCH'
         ]);
 
         $form->handleRequest($request);
@@ -49,13 +62,19 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/change-password", name="app_change_password", methods={"PUT","GET"})
+     * @Route("/change-password", name="app_change_password", methods={"GET","PATCH"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        // if(! $this->getUser()){
+        //     $this->addFlash('error', 'Please, log in first !');
+        //     return $this->redirectToRoute('app_login');
+        // }
+
         $user = $this->getUser();
         $form=$this->createForm(ChangePasswordFormType::class, null, [
-            'method' => 'PUT',
+            'method' => 'PATCH',
             'current_password_required'=>true
         ]);
 

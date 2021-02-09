@@ -23,15 +23,16 @@
 					</p>
 					<p class="pt-3 text-break">{{pin.description}}</p>
 					<div class="pt-3">
-						<a href="{{path('app_pins_edit',{'id':pin.id})}}" class="btn btn-light">Edit</a>
-						<a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Delete</a>
-
-						<form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id:pin.id}) }}" method="POST" style="display:none;">
-							<input type="hidden" name="csrf_token" value="{{csrf_token('pin_deletion_' ~ pin.id)}}">
-							<input type="hidden" name="_method" value="DELETE">
-						</form>
+						<a href="{{path('app_home',{'id':pin.id})}}" class="btn btn-light">Home</a>
+						{% if is_granted('PIN_MANAGE', pin)%}
+							<a href="{{path('app_pins_edit',{'id':pin.id})}}" class="btn btn-light">Edit</a>
+							<a href="#" class="btn btn-danger m-3"  onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-pin-delete-form-{{pin.id}}').submit();">&times; Delete</a>
+								<form id="js-pin-delete-form-{{pin.id}}" action="{{ path('app_pins_delete', {id:pin.id}) }}" method="POST" style="display:none;">
+									<input type="hidden" name="csrf_token" value="{{csrf_token('pin_deletion_' ~ pin.id)}}">
+									<input type="hidden" name="_method" value="DELETE">
+								</form>
+						{% endif %}
 					</div>
-
 				</div>
 			</article>
 		</div>

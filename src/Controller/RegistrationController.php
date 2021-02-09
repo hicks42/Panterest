@@ -99,4 +99,30 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+    /**
+     * @Route("/revalid", name="app_revalid")
+     */
+    public function revalid(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    {
+        $user = $this->getUser();
+        // generate a signed url and email it to the user
+        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            (new TemplatedEmail())
+                ->from(new Address(
+                    $this->getParameter('app.mail_from_adress'),
+                    $this->getParameter('app.mail_from_name'),
+                    ))
+                ->to($user->getEmail())
+                ->subject('Please Confirm your Email')
+                ->htmlTemplate('emails/registration/confirmation_email.html.twig')
+        );
+        // do anything else you need here, like send an email
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+    }
 }

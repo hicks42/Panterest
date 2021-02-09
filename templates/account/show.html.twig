@@ -21,17 +21,23 @@
 		<div class="col-md-6 mx-auto text-center">
 			<h1 class="my-5">Profile</h1>
 
-			<img src="{{app.user.gravatar(500) }}" alt="Avatar" class="shadow rounded">
+			<img src="{{app.user.gravatarUrl(500) }}" alt="Avatar" class="shadow rounded mb-5">
 			<h2>{{app.user.FullName}}</h2>
 			<p class="lead">
-				<a href="mailto:{{app.user.Email}}">
-					{{app.user.Email}}</a>
+				<a href="mailto:{{app.user.Email}}">{{app.user.Email}}</a>
 			</p>
-            <p><small> Account created on {{app.user.createdAt|date('d/m/y')}} </small></p>
+			<p>
+				<small>
+					Account created on
+					{{app.user.createdAt|date('d/m/y')}}
+				</small>
+			</p>
 			<p>
 				<a href="{{path('app_edit_account')}}">Edit account</a>
 				|
 				<a href="{{path('app_change_password')}}">Change password</a>
+				|
+				<a href="{{path('app_revalid')}}">New verfification mail</a>
 			</p>
 		</div>
 	</div>

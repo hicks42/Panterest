@@ -18,10 +18,10 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        if ($this->getUser()) {
-            $this->addFlash('error', 'already logged in !');
-            return $this->redirectToRoute('app_home');
-        }
+        // if ($this->getUser()) {
+        //     $this->addFlash('error', 'already logged in !');
+        //     return $this->redirectToRoute('app_home');
+        // }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

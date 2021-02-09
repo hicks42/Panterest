@@ -24,11 +24,6 @@
 									<strong>{{ pin.user.FullName }}</strong><br>
 									{{ pin.createdAt|ago }}</small>
 							</p>
-							<a href="#" class="btn btn-danger m-3"  onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-pin-delete-form-{{pin.id}}').submit();">&times; Delete</a>
-							<form id="js-pin-delete-form-{{pin.id}}" action="{{ path('app_pins_delete', {id:pin.id}) }}" method="POST" style="display:none;">
-								<input type="hidden" name="csrf_token" value="{{csrf_token('pin_deletion_' ~ pin.id)}}">
-								<input type="hidden" name="_method" value="DELETE">
-							</form>
 						</article>
 					</div>
 				{% endfor %}
